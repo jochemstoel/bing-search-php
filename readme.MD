@@ -1,5 +1,8 @@
 <img src="https://66.media.tumblr.com/db0a3c7d780758c323f737abab420124/tumblr_inline_ocgoil6FFi1ro1ben_1280.jpg">
 
+### Update: safe mode support 
+Thanks to the question of user <a href="https://github.com/novaidea">Novaidea</a> there is now the option for a strict search. (see end of document)
+
 # Bing Search
 This PHP class will retrieve search results from Bing by reading its RSS feed. It will automatically cache results to the <i>Cache</i> folder. Make sure that it is writeable.
 ## Use 
@@ -64,4 +67,22 @@ Array
 ...
 
 ```
+## Safe search (disabled by default)
+Keep in mind that Bing is not perfect like me and it is possible (but very rare) that sometimes it accidentially includes a non-safe result.
+
+#### Example 1 | safe mode disabled (default!)
+
+```js
+$search = new Bing('teen', false); // false means no safe mode
+print_r($search->data);
+```
+
+#### Example 2 | safe mode enabled (true)
+
+```js
+$search = new Bing('teen', true); 
+print_r($search->data); // this will not have teen sex results :(
+```
+
+
 Like always, if you like it then send me a million dollars.

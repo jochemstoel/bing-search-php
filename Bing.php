@@ -14,14 +14,16 @@
 class Bing {
 	
 	var $query;
+	var $safe = false;
 	var $xml;
 	var $data = array();
 	var $cache_path; 
 	var $cache_file;
 
-	function Bing($query) {
+	function Bing($query, $safe = false) {
 		
 		$this->query = urlencode($query);
+		$this->safe = $safe;
 
 		$this->cache_path = dirname(__FILE__) . '/Cache/';
 		$this->cache_file = preg_replace("/[^a-z0-9.]+/i", "+", $this->query) . '.json';
@@ -38,7 +40,8 @@ class Bing {
 	function Query(){
 	 	
 	 	$agent = "AAPP Application/1.0 (Windows; U; Windows NT 5.1; de; rv:1.8.0.4)";
-	    $host = "http://www.bing.com/search?q=".$this->query."&format=rss";
+	 	$safeParam = $this->safe == true ? '&adlt=strict' : '';
+	    echo $host = "http://www.bing.com/search?q=".$this->query. $safeParam . "&format=rss";
 	    $ch = curl_init();
 	    
 	    curl_setopt($ch, CURLOPT_URL, $host);
